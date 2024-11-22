@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AlimentoFragment">
+
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/resumo_refeicoes_title"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/etIdRs"
+        android:layout_width="173dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="36dp"
+        android:ems="10"
+        android:hint="@string/id"
+        android:importantForAutofill="no"
+        android:inputType="number"
+        android:textColorHint="@color/black"
+        app:layout_constraintStart_toStartOf="@+id/btnDeletarRs"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+    <Button
+        android:id="@+id/btnPesquisarRs"
+        android:layout_width="182dp"
+        android:layout_height="53dp"
+        android:text="@string/pesquisar"
+        app:layout_constraintEnd_toEndOf="@+id/btnListarRs"
+        app:layout_constraintTop_toTopOf="@+id/etIdRs" />
+
+    <Button
+        android:id="@+id/btnListarRs"
+        android:layout_width="182dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="22dp"
+        android:text="@string/todos"
+        app:layout_constraintEnd_toEndOf="@+id/tvResultRs"
+        app:layout_constraintTop_toBottomOf="@+id/btnPesquisarRs" />
+
+    <Button
+        android:id="@+id/btnDeletarRs"
+        android:layout_width="173dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="19dp"
+        android:text="@string/deletar"
+        app:layout_constraintStart_toStartOf="@+id/tvResultRs"
+        app:layout_constraintTop_toBottomOf="@+id/etIdRs" />
+
+    <TextView
+        android:id="@+id/tvResultRs"
+        android:layout_width="379dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:scrollbars="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnDeletarRs" />
+</androidx.constraintlayout.widget.ConstraintLayout>

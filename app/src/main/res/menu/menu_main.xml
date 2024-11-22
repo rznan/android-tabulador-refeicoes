@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/itemAlimentos"
+        android:title="@string/alimentos_title" />
+    <item
+        android:id="@+id/itemBebidas"
+        android:title="@string/bebidas_title" />
+    <item
+        android:id="@+id/itemResumo"
+        android:title="@string/resumo_refeicoes_title" />
+    <item
+        android:id="@+id/itemRefeicao"
+        android:title="@string/nova_refeicao_title" />
+</menu>
