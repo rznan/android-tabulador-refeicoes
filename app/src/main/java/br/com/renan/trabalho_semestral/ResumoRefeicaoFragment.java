@@ -10,6 +10,9 @@ import br.com.renan.trabalho_semestral.controller.IController;
 import br.com.renan.trabalho_semestral.model.Refeicao;
 import br.com.renan.trabalho_semestral.support.SafeParser;
 
+/**
+ *@author: renan santos carvalho
+ */
 public class ResumoRefeicaoFragment extends BaseCRUDFragment<Refeicao> {
 
     private EditText etIdRs;

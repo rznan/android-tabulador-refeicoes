@@ -7,6 +7,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *@author: renan santos carvalho
+ */
 public class Refeicao {
     int id;
     LocalDate data;

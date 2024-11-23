@@ -2,6 +2,9 @@ package br.com.renan.trabalho_semestral.model;
 
 import androidx.annotation.NonNull;
 
+/**
+ *@author: renan santos carvalho
+ */
 public class Consumo {
     Consumivel item;
     int quant;

@@ -9,6 +9,9 @@ import br.com.renan.trabalho_semestral.model.Alimento;
 import br.com.renan.trabalho_semestral.model.Bebida;
 import br.com.renan.trabalho_semestral.support.SafeParser;
 
+/**
+ *@author: renan santos carvalho
+ */
 public class BebidaFragment extends BaseCRUDFragment<Bebida> {
 
     private EditText etIdB;

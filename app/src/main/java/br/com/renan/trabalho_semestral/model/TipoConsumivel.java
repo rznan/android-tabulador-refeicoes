@@ -1,5 +1,8 @@
 package br.com.renan.trabalho_semestral.model;
 
+/**
+ *@author: renan santos carvalho
+ */
 public enum TipoConsumivel {
     ALIMENTO(0),
     BEBIDA(1);

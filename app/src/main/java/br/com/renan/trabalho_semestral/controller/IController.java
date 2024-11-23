@@ -3,6 +3,9 @@ package br.com.renan.trabalho_semestral.controller;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ *@author: renan santos carvalho
+ */
 public interface IController<T> {
     void insert(T t) throws SQLException;
 

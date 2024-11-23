@@ -17,6 +17,9 @@ import br.com.renan.trabalho_semestral.model.Consumo;
 import br.com.renan.trabalho_semestral.model.Refeicao;
 import br.com.renan.trabalho_semestral.support.SafeParser;
 
+/**
+ *@author: renan santos carvalho
+ */
 public class RefeicaoFragment extends BaseCRUDFragment<Refeicao> {
 
     List<Consumivel> consumivelFullList;

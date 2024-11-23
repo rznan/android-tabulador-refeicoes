@@ -15,6 +15,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+/**
+ *@author: renan santos carvalho
+ */
 public class MainActivity extends AppCompatActivity {
 
     private Fragment fragment;

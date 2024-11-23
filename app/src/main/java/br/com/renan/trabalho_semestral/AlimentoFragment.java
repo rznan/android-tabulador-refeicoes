@@ -9,6 +9,9 @@ import br.com.renan.trabalho_semestral.controller.IController;
 import br.com.renan.trabalho_semestral.model.Alimento;
 import br.com.renan.trabalho_semestral.support.SafeParser;
 
+/**
+ *@author: renan santos carvalho
+ */
 public class AlimentoFragment extends BaseCRUDFragment<Alimento> {
 
     private EditText etIdA;
