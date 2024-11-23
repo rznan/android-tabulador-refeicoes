@@ -11,7 +11,7 @@ public class Alimento extends Consumivel {
     }
 
     public Alimento(int id, int calorias, String nome, int proteinas, int carboidratos, int gorduras) {
-        super(id, calorias, nome, 0);
+        super(id, calorias, nome, TipoConsumivel.ALIMENTO);
         this.proteinas = proteinas;
         this.carboidratos = carboidratos;
         this.gorduras = gorduras;

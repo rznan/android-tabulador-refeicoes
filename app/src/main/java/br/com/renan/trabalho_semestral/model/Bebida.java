@@ -11,7 +11,7 @@ public class Bebida extends Consumivel{
     }
 
     public Bebida(int id, int calorias, String nome, int volume, int acucares) {
-        super(id, calorias, nome, 1);
+        super(id, calorias, nome, TipoConsumivel.BEBIDA);
         this.volume = volume;
         this.acucares = acucares;
     }

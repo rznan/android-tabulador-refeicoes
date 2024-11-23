@@ -7,13 +7,13 @@ public class Consumivel {
     int id;
     int calorias;
     String nome;
-    int tipo;
+    TipoConsumivel tipo;
 
     public Consumivel() {
         super();
     }
 
-    public Consumivel(int id, int calorias, String nome, int tipo) {
+    public Consumivel(int id, int calorias, String nome, TipoConsumivel tipo) {
         this.id = id;
         this.calorias = calorias;
         this.nome = nome;
@@ -53,11 +53,11 @@ public class Consumivel {
         this.nome = nome;
     }
 
-    public int getTipo() {
+    public TipoConsumivel getTipo() {
         return tipo;
     }
 
-    public void setTipo(int tipo) {
+    protected void setTipo(TipoConsumivel tipo) {
         this.tipo = tipo;
     }
 
