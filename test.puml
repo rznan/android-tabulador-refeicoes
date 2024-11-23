@@ -1,0 +1,245 @@
+@startuml
+class br.com.renan.trabalho_semestral.RefeicaoFragment {
+~ List<Consumivel> consumivelFullList
+~ Refeicao targetRefeicao
+- EditText etIdR
+- EditText etQuantItemR
+- EditText etDataR
+- Button btnPesquisarR
+- Button btnRemoveItemR
+- Button btnAddItemR
+- Button btnUpdateR
+- Button btnSalvarR
+- TextView tvResultR
+- RadioGroup rgConsumivelR
+- RadioButton rbAlimentoR
+- RadioButton rbBebidaR
+- Spinner spinner
++ void initialize()
+- void populateSpinner()
+- void addItem()
+- void removeItem()
++ int getFragmentId()
++ void clearFields()
++ TextView getResultTextview()
++ IController<Refeicao> getController()
++ Refeicao viewToObject()
++ void objectToView(Refeicao)
+}
+
+
+enum br.com.renan.trabalho_semestral.model.TipoConsumivel {
++  ALIMENTO
++  BEBIDA
+- int value
++ int getValue()
+}
+
+
+class br.com.renan.trabalho_semestral.model.Consumivel {
+~ int id
+~ int calorias
+~ String nome
+~ TipoConsumivel tipo
++ String calcularNutricao(int)
++ String calcularNutricaoCompleta(int)
++ int getId()
++ void setId(int)
++ int getCalorias()
++ void setCalorias(int)
++ String getNome()
++ void setNome(String)
++ TipoConsumivel getTipo()
+# void setTipo(TipoConsumivel)
++ String toString()
+}
+
+
+class br.com.renan.trabalho_semestral.BebidaFragment {
+- EditText etIdB
+- EditText etCaloriasA
+- EditText etAcucarB
+- EditText etNomeB
+- EditText etVolumeB
+- Button btnPesquisarB
+- Button btnAtualizarB
+- Button btnSalvarB
+- Button btnListarB
+- Button btnDeletarB
+- TextView tvResultB
++ void initialize()
++ int getFragmentId()
++ void clearFields()
++ TextView getResultTextview()
++ IController<Bebida> getController()
++ Bebida viewToObject()
++ void objectToView(Bebida)
+}
+
+
+class br.com.renan.trabalho_semestral.ExampleInstrumentedTest {
++ void useAppContext()
+}
+
+interface br.com.renan.trabalho_semestral.controller.IController {
+~ void insert(T)
+~ void update(T)
+~ void delete(T)
+~ T search(T)
+~ List<T> list()
+}
+
+class br.com.renan.trabalho_semestral.ResumoRefeicaoFragment {
+- EditText etIdRs
+- Button btnPesquisarRs
+- Button btnListarRs
+- Button btnDeletarRs
+- TextView tvResultRs
++ void initialize()
++ int getFragmentId()
++ void clearFields()
++ TextView getResultTextview()
++ IController<Refeicao> getController()
++ Refeicao viewToObject()
++ void objectToView(Refeicao)
+}
+
+
+class br.com.renan.trabalho_semestral.model.Refeicao {
+~ int id
+~ LocalDate data
+~ List<Consumo> itens
++ int getId()
++ void setId(int)
++ LocalDate getData()
++ void setData(LocalDate)
++ List<Consumo> getItens()
++ void setItens(List<Consumo>)
++ void addItem(Consumivel,int)
++ void removeItem(int)
++ String detalharItens()
++ String toString()
+}
+
+
+class br.com.renan.trabalho_semestral.model.Bebida {
+~ int volume
+~ int acucares
++ String calcularNutricaoCompleta(int)
++ int getVolume()
++ void setVolume(int)
++ int getAcucares()
++ void setAcucares(int)
++ String toString()
+}
+
+
+class br.com.renan.trabalho_semestral.ExampleUnitTest {
++ void addition_isCorrect()
+}
+
+class br.com.renan.trabalho_semestral.AlimentoFragment {
+- EditText etIdA
+- EditText etCaloriasA
+- EditText etCarboidratosA
+- EditText etGorduraA
+- EditText etNomeA
+- EditText etProteinasA
+- Button btnPesquisarA
+- Button btnAtualizarA
+- Button btnSalvarA
+- Button btnListarA
+- Button btnDeletarA
+- TextView tvResultA
++ void initialize()
++ int getFragmentId()
++ void clearFields()
++ TextView getResultTextview()
++ IController<Alimento> getController()
++ Alimento viewToObject()
++ void objectToView(Alimento)
+}
+
+
+class br.com.renan.trabalho_semestral.MainActivity {
+- Fragment fragment
+# void onCreate(Bundle)
+- void loadFragment(Bundle)
+- void loadFragment()
++ boolean onCreateOptionsMenu(Menu)
++ boolean onOptionsItemSelected(MenuItem)
+}
+
+
+abstract class br.com.renan.trabalho_semestral.support.SafeParser {
++ {static} int safeParseInt(String,int)
++ {static} double safeParseDouble(String,double)
++ {static} float safeParseFloat(String,float)
++ {static} long safeParseLong(String,long)
++ {static} LocalDate safeParseLocalDate(String,LocalDate)
+- {static} LocalDate safeParseLocalDate(String,String)
+}
+
+abstract class br.com.renan.trabalho_semestral.BaseCRUDFragment {
+# View view
++ {abstract}void initialize()
++ {abstract}int getFragmentId()
++ {abstract}void clearFields()
++ {abstract}TextView getResultTextview()
++ {abstract}IController<T> getController()
++ {abstract}T viewToObject()
++ {abstract}void objectToView(T)
++ View onCreateView(LayoutInflater,ViewGroup,Bundle)
++ void insert()
++ void update()
++ void delete()
++ void findOne()
++ void findAll()
+}
+
+
+class br.com.renan.trabalho_semestral.model.Alimento {
+~ int proteinas
+~ int carboidratos
+~ int gorduras
++ String calcularNutricaoCompleta(int)
++ int getProteinas()
++ void setProteinas(int)
++ int getCarboidratos()
++ void setCarboidratos(int)
++ int getGorduras()
++ void setGorduras(int)
++ String toString()
+}
+
+
+class br.com.renan.trabalho_semestral.model.Consumo {
+~ Consumivel item
+~ int quant
++ Consumivel getItem()
++ void setItem(Consumivel)
++ int getQuant()
++ void setQuant(int)
++ String resumoTotal()
++ String toString()
+}
+
+
+class br.com.renan.trabalho_semestral.StartFragment {
+- View VIEW
++ View onCreateView(LayoutInflater,ViewGroup,Bundle)
+}
+
+
+
+
+br.com.renan.trabalho_semestral.BaseCRUDFragment <|-- br.com.renan.trabalho_semestral.RefeicaoFragment
+br.com.renan.trabalho_semestral.BaseCRUDFragment <|-- br.com.renan.trabalho_semestral.BebidaFragment
+br.com.renan.trabalho_semestral.BaseCRUDFragment <|-- br.com.renan.trabalho_semestral.ResumoRefeicaoFragment
+br.com.renan.trabalho_semestral.model.Consumivel <|-- br.com.renan.trabalho_semestral.model.Bebida
+br.com.renan.trabalho_semestral.BaseCRUDFragment <|-- br.com.renan.trabalho_semestral.AlimentoFragment
+androidx.appcompat.app.AppCompatActivity <|-- br.com.renan.trabalho_semestral.MainActivity
+androidx.fragment.app.Fragment <|-- br.com.renan.trabalho_semestral.BaseCRUDFragment
+br.com.renan.trabalho_semestral.model.Consumivel <|-- br.com.renan.trabalho_semestral.model.Alimento
+androidx.fragment.app.Fragment <|-- br.com.renan.trabalho_semestral.StartFragment
+@enduml

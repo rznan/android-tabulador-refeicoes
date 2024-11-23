@@ -9,12 +9,16 @@ public class Bebida extends Consumivel{
     int volume;
     int acucares;
 
+    @Override
+    public TipoConsumivel getTipo() {
+        return TipoConsumivel.BEBIDA;
+    }
+
     public Bebida() {
-        super();
     }
 
     public Bebida(int id, int calorias, String nome, int volume, int acucares) {
-        super(id, calorias, nome, TipoConsumivel.BEBIDA);
+        super(id, calorias, nome);
         this.volume = volume;
         this.acucares = acucares;
     }

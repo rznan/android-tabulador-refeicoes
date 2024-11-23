@@ -10,11 +10,16 @@ public class Alimento extends Consumivel {
     int carboidratos;
     int gorduras;
 
+    @Override
+    public TipoConsumivel getTipo() {
+        return TipoConsumivel.ALIMENTO;
+    }
+
     public Alimento() {
     }
 
     public Alimento(int id, int calorias, String nome, int proteinas, int carboidratos, int gorduras) {
-        super(id, calorias, nome, TipoConsumivel.ALIMENTO);
+        super(id, calorias, nome);
         this.proteinas = proteinas;
         this.carboidratos = carboidratos;
         this.gorduras = gorduras;
