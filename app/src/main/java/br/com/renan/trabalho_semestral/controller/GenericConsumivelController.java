@@ -11,7 +11,7 @@ import br.com.renan.trabalho_semestral.persistence.IOpenClosableDAO;
 
 public abstract class GenericConsumivelController<T extends Consumivel> implements IController<T> {
 
-    private final IOpenClosableDAO<Consumivel, ICRUDDao<Consumivel>> DAO;
+    protected final IOpenClosableDAO<Consumivel, ICRUDDao<Consumivel>> DAO;
 
     protected abstract TipoConsumivel getConsumivelTipo();
 

@@ -4,15 +4,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import br.com.renan.trabalho_semestral.controller.BebidaController;
 import br.com.renan.trabalho_semestral.controller.IController;
 import br.com.renan.trabalho_semestral.model.Alimento;
 import br.com.renan.trabalho_semestral.model.Bebida;
+import br.com.renan.trabalho_semestral.persistence.ICRUDDao;
 import br.com.renan.trabalho_semestral.support.SafeParser;
 
 /**
  *@author: renan santos carvalho
  */
 public class BebidaFragment extends BaseCRUDFragment<Bebida> {
+
+    IController<Bebida> controller;
 
     private EditText etIdB;
     private EditText etCaloriasA;
@@ -48,6 +52,8 @@ public class BebidaFragment extends BaseCRUDFragment<Bebida> {
         btnDeletarB.setOnClickListener(e -> super.delete());
 
         tvResultB = view.findViewById(R.id.tvResultB);
+
+        controller = new BebidaController(null);
     }
 
     @Override
@@ -71,7 +77,7 @@ public class BebidaFragment extends BaseCRUDFragment<Bebida> {
 
     @Override
     public IController<Bebida> getController() {
-        return null;
+        return controller;
     }
 
     @Override

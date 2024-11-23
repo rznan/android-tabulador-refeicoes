@@ -1,19 +1,26 @@
 package br.com.renan.trabalho_semestral;
 
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import br.com.renan.trabalho_semestral.controller.AlimentoController;
+import br.com.renan.trabalho_semestral.controller.BebidaController;
 import br.com.renan.trabalho_semestral.controller.IController;
+import br.com.renan.trabalho_semestral.controller.RefeicaoController;
+import br.com.renan.trabalho_semestral.model.Alimento;
+import br.com.renan.trabalho_semestral.model.Bebida;
 import br.com.renan.trabalho_semestral.model.Consumivel;
-import br.com.renan.trabalho_semestral.model.Consumo;
 import br.com.renan.trabalho_semestral.model.Refeicao;
 import br.com.renan.trabalho_semestral.support.SafeParser;
 
@@ -22,7 +29,10 @@ import br.com.renan.trabalho_semestral.support.SafeParser;
  */
 public class RefeicaoFragment extends BaseCRUDFragment<Refeicao> {
 
-    List<Consumivel> consumivelFullList;
+    IController<Refeicao> refeicaoIController;
+    IController<Alimento> alimentoIController;
+    IController<Bebida> bebidaIController;
+
     Refeicao targetRefeicao;
 
     private EditText etIdR;
@@ -56,33 +66,75 @@ public class RefeicaoFragment extends BaseCRUDFragment<Refeicao> {
         btnUpdateR = view.findViewById(R.id.btnUpdateR);
         btnUpdateR.setOnClickListener(e -> super.update());
         btnSalvarR = view.findViewById(R.id.btnSalvarR);
-        btnSalvarR.setOnClickListener(e -> super.insert());
+        btnSalvarR.setOnClickListener(e -> {
+            if(spinner.getSelectedItemPosition() == 0) {
+                Toast.makeText(view.getContext(), "Selecione um time", Toast.LENGTH_LONG).show();
+            } else {
+                if(SafeParser.safeParseInt(etIdR.getText().toString(), 0) <= 0) {
+                    Toast.makeText(view.getContext(), "0 não é um id válido", Toast.LENGTH_LONG).show();
+                } else {
+                    super.insert();
+                }
+            }
+        });
 
         tvResultR = view.findViewById(R.id.tvResultR);
 
         rgConsumivelR = view.findViewById(R.id.rgConsumivelR);
+        rgConsumivelR.setOnCheckedChangeListener((a, b) -> populateSpinner());
         rbAlimentoR = view.findViewById(R.id.rbAlimentoR);
         rbBebidaR = view.findViewById(R.id.rbBebidaR);
         rbAlimentoR.setChecked(true);
 
         spinner = view.findViewById(R.id.spinner);
 
+        refeicaoIController = new RefeicaoController(null);
+        alimentoIController = new AlimentoController(null);
+        bebidaIController = new BebidaController(null);
+
         populateSpinner();
+
     }
 
     private void populateSpinner() {
 
+        try {
+            if(rbBebidaR.isChecked()) {
+                List<Bebida> list = bebidaIController.list();
+                Bebida b0 = new Bebida(0, 0, "Selecione uma bebida", 0, 0);
+                list.add(0, b0);
+                ArrayAdapter<Bebida> arrayAdapter = new ArrayAdapter<Bebida>(view.getContext(),
+                        android.R.layout.simple_spinner_item,
+                        list
+                );
+                arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinner.setAdapter(arrayAdapter);
+            } else {
+                List<Alimento> list = alimentoIController.list();
+                Alimento b0 = new Alimento(0, 0, "Selecione uma bebida", 0, 0 ,0);
+                list.add(0, b0);
+                ArrayAdapter<Alimento> arrayAdapter = new ArrayAdapter<Alimento>(view.getContext(),
+                        android.R.layout.simple_spinner_item,
+                        list
+                );
+                arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinner.setAdapter(arrayAdapter);
+            }
+        } catch (SQLException e) {
+            Toast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+        }
+
     }
 
     private void addItem() {
-        // select item from spinner
-        // consumivelList.add(c);
+        int quant = SafeParser.safeParseInt(this.etQuantItemR.getText().toString(), 1);
+        targetRefeicao.addItem((Consumivel) spinner.getSelectedItem(), quant);
         getResultTextview().setText(targetRefeicao.detalharItens());
     }
 
     private void removeItem() {
-        // select item from spinner
-        // consumivelList.remove(c);
+        Consumivel c = (Consumivel) spinner.getSelectedItem();
+        targetRefeicao.removeItem(c.getId());
         getResultTextview().setText(targetRefeicao.detalharItens());
     }
 
@@ -105,7 +157,7 @@ public class RefeicaoFragment extends BaseCRUDFragment<Refeicao> {
 
     @Override
     public IController<Refeicao> getController() {
-        return null;
+        return refeicaoIController;
     }
 
     @Override
@@ -127,6 +179,7 @@ public class RefeicaoFragment extends BaseCRUDFragment<Refeicao> {
         );
         this.etQuantItemR.setText(String.valueOf(0));
         targetRefeicao = refeicao;
+        spinner.setSelection(0);
         getResultTextview().setText(targetRefeicao.detalharItens());
     }
 }

@@ -3,10 +3,13 @@ package br.com.renan.trabalho_semestral;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 
 import br.com.renan.trabalho_semestral.controller.IController;
+import br.com.renan.trabalho_semestral.controller.RefeicaoController;
 import br.com.renan.trabalho_semestral.model.Refeicao;
 import br.com.renan.trabalho_semestral.support.SafeParser;
 
@@ -14,6 +17,8 @@ import br.com.renan.trabalho_semestral.support.SafeParser;
  *@author: renan santos carvalho
  */
 public class ResumoRefeicaoFragment extends BaseCRUDFragment<Refeicao> {
+
+    IController<Refeicao> refeicaoIController;
 
     private EditText etIdRs;
     private Button btnPesquisarRs;
@@ -34,6 +39,8 @@ public class ResumoRefeicaoFragment extends BaseCRUDFragment<Refeicao> {
         btnDeletarRs.setOnClickListener(e -> super.delete());
 
         tvResultRs = view.findViewById(R.id.tvResultRs);
+
+        refeicaoIController = new RefeicaoController(null);
     }
 
     @Override
@@ -53,7 +60,7 @@ public class ResumoRefeicaoFragment extends BaseCRUDFragment<Refeicao> {
 
     @Override
     public IController<Refeicao> getController() {
-        return null;
+        return refeicaoIController;
     }
 
     @Override
@@ -63,5 +70,15 @@ public class ResumoRefeicaoFragment extends BaseCRUDFragment<Refeicao> {
     }
 
     @Override
-    public void objectToView(Refeicao refeicao) { }
+    public void objectToView(Refeicao refeicao) {
+        tvResultRs.setText(refeicao.detalharItens());
+    }
+
+    @Override
+    public void insert() {
+    }
+
+    @Override
+    public void update() {
+    }
 }
