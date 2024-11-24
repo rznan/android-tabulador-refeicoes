@@ -1,5 +1,6 @@
 package br.com.renan.trabalho_semestral;
 
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,6 +14,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.logging.Logger;
 
 import br.com.renan.trabalho_semestral.controller.AlimentoController;
 import br.com.renan.trabalho_semestral.controller.BebidaController;
@@ -23,6 +25,7 @@ import br.com.renan.trabalho_semestral.model.Bebida;
 import br.com.renan.trabalho_semestral.model.Consumivel;
 import br.com.renan.trabalho_semestral.model.Refeicao;
 import br.com.renan.trabalho_semestral.persistence.ConsumivelDao;
+import br.com.renan.trabalho_semestral.persistence.RefeicaoDao;
 import br.com.renan.trabalho_semestral.support.SafeParser;
 
 /**
@@ -72,14 +75,10 @@ public class RefeicaoFragment extends BaseCRUDFragment<Refeicao> {
         btnUpdateR.setOnClickListener(e -> super.update());
         btnSalvarR = view.findViewById(R.id.btnSalvarR);
         btnSalvarR.setOnClickListener(e -> {
-            if(spinner.getSelectedItemPosition() == 0) {
-                Toast.makeText(view.getContext(), "Selecione um time", Toast.LENGTH_LONG).show();
+            if(SafeParser.safeParseInt(etIdR.getText().toString(), 0) <= 0) {
+                Toast.makeText(view.getContext(), "0 não é um id válido", Toast.LENGTH_LONG).show();
             } else {
-                if(SafeParser.safeParseInt(etIdR.getText().toString(), 0) <= 0) {
-                    Toast.makeText(view.getContext(), "0 não é um id válido", Toast.LENGTH_LONG).show();
-                } else {
-                    super.insert();
-                }
+                super.insert();
             }
         });
 
@@ -93,9 +92,11 @@ public class RefeicaoFragment extends BaseCRUDFragment<Refeicao> {
 
         spinner = view.findViewById(R.id.spinner);
 
-        refeicaoIController = new RefeicaoController(null);
+        refeicaoIController = new RefeicaoController(new RefeicaoDao(view.getContext()));
         alimentoIController = new AlimentoController(new ConsumivelDao(view.getContext()));
         bebidaIController = new BebidaController(new ConsumivelDao(view.getContext()));
+
+        targetRefeicao = new Refeicao();
 
         populateSpinner();
 
@@ -133,8 +134,14 @@ public class RefeicaoFragment extends BaseCRUDFragment<Refeicao> {
 
     private void addItem() {
         int quant = SafeParser.safeParseInt(this.etQuantItemR.getText().toString(), 1);
-        targetRefeicao.addItem((Consumivel) spinner.getSelectedItem(), quant);
-        getResultTextview().setText(targetRefeicao.detalharItens());
+
+        if(spinner.getSelectedItemPosition() == 0) {
+            Toast.makeText(view.getContext(), "Selecione um item", Toast.LENGTH_LONG).show();
+        } else {
+                targetRefeicao.addItem((Consumivel) spinner.getSelectedItem(), quant);
+                getResultTextview().setText(targetRefeicao.detalharItens());
+        }
+
     }
 
     private void removeItem() {

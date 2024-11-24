@@ -4,14 +4,13 @@ import java.sql.SQLException;
 import java.util.List;
 
 import br.com.renan.trabalho_semestral.model.Refeicao;
-import br.com.renan.trabalho_semestral.persistence.ICRUDDao;
-import br.com.renan.trabalho_semestral.persistence.IOpenClosableDAO;
+import br.com.renan.trabalho_semestral.persistence.RefeicaoDao;
 
 public class RefeicaoController implements IController<Refeicao> {
 
-    final IOpenClosableDAO<Refeicao, ICRUDDao<Refeicao>> DAO;
+    final RefeicaoDao DAO;
 
-    public RefeicaoController(IOpenClosableDAO<Refeicao, ICRUDDao<Refeicao>> dao) {
+    public RefeicaoController(RefeicaoDao dao) {
         DAO = dao;
     }
 

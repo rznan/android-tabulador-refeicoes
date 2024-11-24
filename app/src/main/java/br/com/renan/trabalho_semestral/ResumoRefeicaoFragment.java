@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import br.com.renan.trabalho_semestral.controller.IController;
 import br.com.renan.trabalho_semestral.controller.RefeicaoController;
 import br.com.renan.trabalho_semestral.model.Refeicao;
+import br.com.renan.trabalho_semestral.persistence.RefeicaoDao;
 import br.com.renan.trabalho_semestral.support.SafeParser;
 
 /**
@@ -43,7 +44,7 @@ public class ResumoRefeicaoFragment extends BaseCRUDFragment<Refeicao> {
 
         tvResultRs = view.findViewById(R.id.tvResultRs);
 
-        refeicaoIController = new RefeicaoController(null);
+        refeicaoIController = new RefeicaoController(new RefeicaoDao(view.getContext()));
     }
 
     @Override

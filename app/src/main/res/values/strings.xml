@@ -26,5 +26,5 @@
     <string name="nome_refeicao">Nome Refeição</string>
     <string name="adicionar">adicionar</string>
     <string name="remover">remover</string>
-    <string name="data">data</string>
+    <string name="data">data (padrão = hoje)</string>
 </resources>

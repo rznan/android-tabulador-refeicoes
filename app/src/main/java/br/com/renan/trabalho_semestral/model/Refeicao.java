@@ -17,6 +17,7 @@ public class Refeicao {
 
     public Refeicao() {
         itens = new ArrayList<>();
+        data = LocalDate.now();
     }
 
     public Refeicao(int id, LocalDate data) {
@@ -59,7 +60,10 @@ public class Refeicao {
 
     public String detalharItens() {
         StringBuilder sb = new StringBuilder();
-        sb.append(id).append(", ").append(data.format(DateTimeFormatter.ofPattern("yyyy/MM/dd")));
+        if(id != 0 && id >= 1) {
+            sb.append(id).append(", ");
+        }
+        sb.append(data.format(DateTimeFormatter.ofPattern("yyyy/MM/dd")));
         sb.append("\n");
 
         int count = 0;

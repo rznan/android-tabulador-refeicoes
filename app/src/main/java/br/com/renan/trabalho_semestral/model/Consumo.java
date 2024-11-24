@@ -31,7 +31,7 @@ public class Consumo {
     }
 
     public String resumoTotal() {
-        return "X" + quant + " - " + item.calcularNutricaoCompleta(quant);
+        return "X" + quant + " > " + item.calcularNutricaoCompleta(quant);
     }
 
     @NonNull
