@@ -1,6 +1,5 @@
 package br.com.renan.trabalho_semestral;
 
-import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,7 +13,6 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.logging.Logger;
 
 import br.com.renan.trabalho_semestral.controller.AlimentoController;
 import br.com.renan.trabalho_semestral.controller.BebidaController;
@@ -42,14 +40,7 @@ public class RefeicaoFragment extends BaseCRUDFragment<Refeicao> {
     private EditText etIdR;
     private EditText etQuantItemR;
     private EditText etDataR;
-    private Button btnPesquisarR;
-    private Button btnRemoveItemR;
-    private Button btnAddItemR;
-    private Button btnUpdateR;
-    private Button btnSalvarR;
     private TextView tvResultR;
-    private RadioGroup rgConsumivelR;
-    private RadioButton rbAlimentoR;
     private RadioButton rbBebidaR;
     private Spinner spinner;
 
@@ -63,17 +54,17 @@ public class RefeicaoFragment extends BaseCRUDFragment<Refeicao> {
         etQuantItemR = view.findViewById(R.id.etQuantItemR);
         etDataR = view.findViewById(R.id.etDataR);
 
-        btnPesquisarR = view.findViewById(R.id.btnPesquisarR);
+        Button btnPesquisarR = view.findViewById(R.id.btnPesquisarR);
         btnPesquisarR.setOnClickListener(e -> super.findOne());
 
-        btnRemoveItemR = view.findViewById(R.id.btnRemoveItemR);
+        Button btnRemoveItemR = view.findViewById(R.id.btnRemoveItemR);
         btnRemoveItemR.setOnClickListener(e -> removeItem());
-        btnAddItemR = view.findViewById(R.id.btnAddItemR);
+        Button btnAddItemR = view.findViewById(R.id.btnAddItemR);
         btnAddItemR.setOnClickListener(e -> addItem());
 
-        btnUpdateR = view.findViewById(R.id.btnUpdateR);
+        Button btnUpdateR = view.findViewById(R.id.btnUpdateR);
         btnUpdateR.setOnClickListener(e -> super.update());
-        btnSalvarR = view.findViewById(R.id.btnSalvarR);
+        Button btnSalvarR = view.findViewById(R.id.btnSalvarR);
         btnSalvarR.setOnClickListener(e -> {
             if(SafeParser.safeParseInt(etIdR.getText().toString(), 0) <= 0) {
                 Toast.makeText(view.getContext(), "0 não é um id válido", Toast.LENGTH_LONG).show();
@@ -84,9 +75,9 @@ public class RefeicaoFragment extends BaseCRUDFragment<Refeicao> {
 
         tvResultR = view.findViewById(R.id.tvResultR);
 
-        rgConsumivelR = view.findViewById(R.id.rgConsumivelR);
+        RadioGroup rgConsumivelR = view.findViewById(R.id.rgConsumivelR);
         rgConsumivelR.setOnCheckedChangeListener((a, b) -> populateSpinner());
-        rbAlimentoR = view.findViewById(R.id.rbAlimentoR);
+        RadioButton rbAlimentoR = view.findViewById(R.id.rbAlimentoR);
         rbBebidaR = view.findViewById(R.id.rbBebidaR);
         rbAlimentoR.setSelected(true);
 
@@ -109,7 +100,7 @@ public class RefeicaoFragment extends BaseCRUDFragment<Refeicao> {
                 List<Bebida> list = bebidaIController.list();
                 Bebida b0 = new Bebida(0, 0, "Selecione um item", 0, 0);
                 list.add(0, b0);
-                ArrayAdapter<Bebida> arrayAdapter = new ArrayAdapter<Bebida>(view.getContext(),
+                ArrayAdapter<Bebida> arrayAdapter = new ArrayAdapter<>(view.getContext(),
                         android.R.layout.simple_spinner_item,
                         list
                 );
@@ -119,7 +110,7 @@ public class RefeicaoFragment extends BaseCRUDFragment<Refeicao> {
                 List<Alimento> list = alimentoIController.list();
                 Alimento b0 = new Alimento(0, 0, "Selecione um item", 0, 0 ,0);
                 list.add(0, b0);
-                ArrayAdapter<Alimento> arrayAdapter = new ArrayAdapter<Alimento>(view.getContext(),
+                ArrayAdapter<Alimento> arrayAdapter = new ArrayAdapter<>(view.getContext(),
                         android.R.layout.simple_spinner_item,
                         list
                 );

@@ -14,6 +14,9 @@ public class Consumo {
         this.quant = quant;
     }
 
+    public Consumo() {
+    }
+
     public Consumivel getItem() {
         return item;
     }

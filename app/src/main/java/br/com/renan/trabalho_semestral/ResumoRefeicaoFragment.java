@@ -3,9 +3,7 @@ package br.com.renan.trabalho_semestral;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.sql.SQLException;
 import java.time.LocalDate;
 
 import br.com.renan.trabalho_semestral.controller.IController;
@@ -22,9 +20,6 @@ public class ResumoRefeicaoFragment extends BaseCRUDFragment<Refeicao> {
     IController<Refeicao> refeicaoIController;
 
     private EditText etIdRs;
-    private Button btnPesquisarRs;
-    private Button btnListarRs;
-    private Button btnDeletarRs;
     private TextView tvResultRs;
 
     public ResumoRefeicaoFragment() {
@@ -35,11 +30,11 @@ public class ResumoRefeicaoFragment extends BaseCRUDFragment<Refeicao> {
     public void initialize() {
         etIdRs = view.findViewById(R.id.etIdRs);
 
-        btnPesquisarRs = view.findViewById(R.id.btnPesquisarRs);
+        Button btnPesquisarRs = view.findViewById(R.id.btnPesquisarRs);
         btnPesquisarRs.setOnClickListener(e -> super.findOne());
-        btnListarRs = view.findViewById(R.id.btnListarRs);
+        Button btnListarRs = view.findViewById(R.id.btnListarRs);
         btnListarRs.setOnClickListener(e -> super.findAll());
-        btnDeletarRs = view.findViewById(R.id.btnDeletarRs);
+        Button btnDeletarRs = view.findViewById(R.id.btnDeletarRs);
         btnDeletarRs.setOnClickListener(e -> super.delete());
 
         tvResultRs = view.findViewById(R.id.tvResultRs);

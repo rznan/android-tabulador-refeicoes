@@ -18,6 +18,7 @@ import java.util.List;
 import br.com.renan.trabalho_semestral.model.Alimento;
 import br.com.renan.trabalho_semestral.model.Bebida;
 import br.com.renan.trabalho_semestral.model.Consumivel;
+import br.com.renan.trabalho_semestral.model.Consumo;
 import br.com.renan.trabalho_semestral.model.TipoConsumivel;
 
 public class ConsumivelDao implements IOpenClosableDAO<Consumivel, ConsumivelDao>, ICRUDDao<Consumivel> {
@@ -100,6 +101,11 @@ public class ConsumivelDao implements IOpenClosableDAO<Consumivel, ConsumivelDao
                     null
             );
         }
+        database.delete(
+                "Consumo",
+                "id_consumivel = " + consumivel.getId(),
+                null
+        );
         database.delete(
                 "Consumivel",
                 "id_consumivel = " + consumivel.getId(),
@@ -207,6 +213,67 @@ public class ConsumivelDao implements IOpenClosableDAO<Consumivel, ConsumivelDao
         }
         return list;
     }
+
+    @SuppressLint("Range")
+    public List<Consumo> findConsumoByRefeicao(int idRefeicao) throws SQLException {
+        List<Consumo> list = new ArrayList<>();
+        @Language("RoomSql") String sqlBebidas =
+                "SELECT " +
+                        "C.id_refeicao, " +
+                        "C.id_consumivel, " +
+                        "C.quantidade, " +
+                        "Cn.calorias, " +
+                        "Cn.nome, " +
+                        "Cn.tipo, " +
+                        "b.volume," +
+                        "b.acucares " +
+                        "FROM Consumo C, Consumivel Cn, Bebida b " +
+                        "WHERE " +
+                        "C.id_consumivel = Cn.id_consumivel AND " +
+                        "C.id_consumivel = b.id_consumivel AND " +
+                        "C.id_refeicao = " + idRefeicao;
+
+        @Language("RoomSql") String sqlAlimento =
+                "SELECT " +
+                        "C.id_refeicao, " +
+                        "C.id_consumivel, " +
+                        "C.quantidade, " +
+                        "Cn.calorias, " +
+                        "Cn.nome, " +
+                        "Cn.tipo, " +
+                        "A.proteinas, " +
+                        "A.gorduras, " +
+                        "A.carboidratos " +
+                        "FROM Consumo C, Consumivel Cn, Alimento A " +
+                        "WHERE " +
+                        "C.id_consumivel = Cn.id_consumivel AND " +
+                        "C.id_consumivel = A.id_consumivel AND " +
+                        "C.id_refeicao = " + idRefeicao;
+
+        Cursor cursor = getCursor(sqlBebidas);
+        while (cursor != null && !cursor.isAfterLast()) {
+            list.add(getConsumo(cursor));
+            cursor.moveToNext();
+        }
+
+        cursor = getCursor(sqlAlimento);
+        while (cursor != null && !cursor.isAfterLast()) {
+            list.add(getConsumo(cursor));
+            cursor.moveToNext();
+        }
+
+        return list;
+    }
+
+    @SuppressLint("Range")
+    private static Consumo getConsumo(Cursor cursor) {
+        Consumivel consumivel = getConsumivel(cursor);
+        Consumo consumo = new Consumo();
+        consumo.setQuant(cursor.getInt(cursor.getColumnIndex("quantidade")));
+        consumo.setItem(consumivel);
+        return consumo;
+    }
+
 
     private @Nullable Cursor getCursor(@Language("RoomSql") String sql) {
         Cursor cursor = database.rawQuery(sql, null);
