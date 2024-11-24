@@ -151,6 +151,7 @@ public class RefeicaoFragment extends BaseCRUDFragment<Refeicao> {
         this.etIdR.setText("");
         this.etQuantItemR.setText("");
         this.etDataR.setText("");
+        this.getResultTextview().setText("");
     }
 
     @Override

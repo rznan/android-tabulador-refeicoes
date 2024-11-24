@@ -50,6 +50,7 @@ public class ResumoRefeicaoFragment extends BaseCRUDFragment<Refeicao> {
     @Override
     public void clearFields() {
         this.etIdRs.setText("");
+        this.tvResultRs.setText("");
     }
 
     @Override
