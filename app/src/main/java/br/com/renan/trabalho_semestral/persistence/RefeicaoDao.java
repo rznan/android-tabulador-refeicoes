@@ -19,6 +19,9 @@ import java.util.List;
 import br.com.renan.trabalho_semestral.model.Consumo;
 import br.com.renan.trabalho_semestral.model.Refeicao;
 
+/**
+ * @author: renan santos carvalho
+ */
 public class RefeicaoDao implements IOpenClosableDAO<Refeicao, RefeicaoDao> {
 
     private final Context context;

@@ -21,6 +21,9 @@ import br.com.renan.trabalho_semestral.model.Consumivel;
 import br.com.renan.trabalho_semestral.model.Consumo;
 import br.com.renan.trabalho_semestral.model.TipoConsumivel;
 
+/**
+ * @author: renan santos carvalho
+ */
 public class ConsumivelDao implements IOpenClosableDAO<Consumivel, ConsumivelDao>, ICRUDDao<Consumivel> {
 
     private final Context context;

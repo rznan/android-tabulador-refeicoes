@@ -15,7 +15,7 @@ import br.com.renan.trabalho_semestral.support.SafeParser;
  */
 public class AlimentoFragment extends BaseCRUDFragment<Alimento> {
 
-    AlimentoController controller;
+    IController<Alimento> controller;
 
     private EditText etIdA;
     private EditText etCaloriasA;
