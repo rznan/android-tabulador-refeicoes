@@ -8,6 +8,7 @@ import br.com.renan.trabalho_semestral.controller.BebidaController;
 import br.com.renan.trabalho_semestral.controller.IController;
 import br.com.renan.trabalho_semestral.model.Alimento;
 import br.com.renan.trabalho_semestral.model.Bebida;
+import br.com.renan.trabalho_semestral.persistence.ConsumivelDao;
 import br.com.renan.trabalho_semestral.persistence.ICRUDDao;
 import br.com.renan.trabalho_semestral.support.SafeParser;
 
@@ -32,6 +33,10 @@ public class BebidaFragment extends BaseCRUDFragment<Bebida> {
 
     private TextView tvResultB;
 
+    public BebidaFragment() {
+        super();
+    }
+
     @Override
     public void initialize() {
         etIdB = view.findViewById(R.id.etIdB);
@@ -53,7 +58,7 @@ public class BebidaFragment extends BaseCRUDFragment<Bebida> {
 
         tvResultB = view.findViewById(R.id.tvResultB);
 
-        controller = new BebidaController(null);
+        controller = new BebidaController(new ConsumivelDao(view.getContext()));
     }
 
     @Override

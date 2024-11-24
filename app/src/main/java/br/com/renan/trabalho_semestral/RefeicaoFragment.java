@@ -22,6 +22,7 @@ import br.com.renan.trabalho_semestral.model.Alimento;
 import br.com.renan.trabalho_semestral.model.Bebida;
 import br.com.renan.trabalho_semestral.model.Consumivel;
 import br.com.renan.trabalho_semestral.model.Refeicao;
+import br.com.renan.trabalho_semestral.persistence.ConsumivelDao;
 import br.com.renan.trabalho_semestral.support.SafeParser;
 
 /**
@@ -48,6 +49,10 @@ public class RefeicaoFragment extends BaseCRUDFragment<Refeicao> {
     private RadioButton rbAlimentoR;
     private RadioButton rbBebidaR;
     private Spinner spinner;
+
+    public RefeicaoFragment() {
+        super();
+    }
 
     @Override
     public void initialize() {
@@ -84,13 +89,13 @@ public class RefeicaoFragment extends BaseCRUDFragment<Refeicao> {
         rgConsumivelR.setOnCheckedChangeListener((a, b) -> populateSpinner());
         rbAlimentoR = view.findViewById(R.id.rbAlimentoR);
         rbBebidaR = view.findViewById(R.id.rbBebidaR);
-        rbAlimentoR.setChecked(true);
+        rbAlimentoR.setSelected(true);
 
         spinner = view.findViewById(R.id.spinner);
 
         refeicaoIController = new RefeicaoController(null);
-        alimentoIController = new AlimentoController(null);
-        bebidaIController = new BebidaController(null);
+        alimentoIController = new AlimentoController(new ConsumivelDao(view.getContext()));
+        bebidaIController = new BebidaController(new ConsumivelDao(view.getContext()));
 
         populateSpinner();
 
@@ -101,7 +106,7 @@ public class RefeicaoFragment extends BaseCRUDFragment<Refeicao> {
         try {
             if(rbBebidaR.isChecked()) {
                 List<Bebida> list = bebidaIController.list();
-                Bebida b0 = new Bebida(0, 0, "Selecione uma bebida", 0, 0);
+                Bebida b0 = new Bebida(0, 0, "Selecione um item", 0, 0);
                 list.add(0, b0);
                 ArrayAdapter<Bebida> arrayAdapter = new ArrayAdapter<Bebida>(view.getContext(),
                         android.R.layout.simple_spinner_item,
@@ -111,7 +116,7 @@ public class RefeicaoFragment extends BaseCRUDFragment<Refeicao> {
                 spinner.setAdapter(arrayAdapter);
             } else {
                 List<Alimento> list = alimentoIController.list();
-                Alimento b0 = new Alimento(0, 0, "Selecione uma bebida", 0, 0 ,0);
+                Alimento b0 = new Alimento(0, 0, "Selecione um item", 0, 0 ,0);
                 list.add(0, b0);
                 ArrayAdapter<Alimento> arrayAdapter = new ArrayAdapter<Alimento>(view.getContext(),
                         android.R.layout.simple_spinner_item,

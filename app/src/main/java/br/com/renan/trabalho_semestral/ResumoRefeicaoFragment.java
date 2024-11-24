@@ -26,6 +26,9 @@ public class ResumoRefeicaoFragment extends BaseCRUDFragment<Refeicao> {
     private Button btnDeletarRs;
     private TextView tvResultRs;
 
+    public ResumoRefeicaoFragment() {
+        super();
+    }
 
     @Override
     public void initialize() {

@@ -6,17 +6,16 @@ import java.util.List;
 
 import br.com.renan.trabalho_semestral.model.Consumivel;
 import br.com.renan.trabalho_semestral.model.TipoConsumivel;
-import br.com.renan.trabalho_semestral.persistence.ICRUDDao;
-import br.com.renan.trabalho_semestral.persistence.IOpenClosableDAO;
+import br.com.renan.trabalho_semestral.persistence.ConsumivelDao;
 
 public abstract class GenericConsumivelController<T extends Consumivel> implements IController<T> {
 
-    protected final IOpenClosableDAO<Consumivel, ICRUDDao<Consumivel>> DAO;
+    protected final ConsumivelDao DAO;
 
     protected abstract TipoConsumivel getConsumivelTipo();
 
 
-    public GenericConsumivelController(IOpenClosableDAO<Consumivel, ICRUDDao<Consumivel>> dao) {
+    public GenericConsumivelController(ConsumivelDao dao) {
         DAO = dao;
         // facade no persistence que sabe contruir
     }
@@ -55,11 +54,11 @@ public abstract class GenericConsumivelController<T extends Consumivel> implemen
         }
         Consumivel one = DAO.findOne(t);
         DAO.close();
-        if(one.getTipo() == getConsumivelTipo()) {
+        if(one != null && one.getTipo() == getConsumivelTipo()) {
             //noinspection unchecked
             return (T) one;
         }
-        throw new SQLException("Não foi possível encontrar o alimento");
+        throw new SQLException("Não foi possível encontrar o item");
     }
 
     @Override

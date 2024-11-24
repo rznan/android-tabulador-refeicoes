@@ -1,14 +1,15 @@
 package br.com.renan.trabalho_semestral;
 
-import android.text.method.ScrollingMovementMethod;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.sql.SQLException;
+
 import br.com.renan.trabalho_semestral.controller.AlimentoController;
 import br.com.renan.trabalho_semestral.controller.IController;
 import br.com.renan.trabalho_semestral.model.Alimento;
-import br.com.renan.trabalho_semestral.model.Refeicao;
+import br.com.renan.trabalho_semestral.persistence.ConsumivelDao;
 import br.com.renan.trabalho_semestral.support.SafeParser;
 
 /**
@@ -16,7 +17,7 @@ import br.com.renan.trabalho_semestral.support.SafeParser;
  */
 public class AlimentoFragment extends BaseCRUDFragment<Alimento> {
 
-    IController<Alimento> controller;
+    AlimentoController controller;
 
     private EditText etIdA;
     private EditText etCaloriasA;
@@ -24,13 +25,11 @@ public class AlimentoFragment extends BaseCRUDFragment<Alimento> {
     private EditText etGorduraA;
     private EditText etNomeA;
     private EditText etProteinasA;
-    private Button btnPesquisarA;
-    private Button btnAtualizarA;
-    private Button btnSalvarA;
-    private Button btnListarA;
-    private Button btnDeletarA;
     private TextView tvResultA;
 
+    public AlimentoFragment() {
+        super();
+    }
 
     @Override
     public void initialize() {
@@ -41,20 +40,21 @@ public class AlimentoFragment extends BaseCRUDFragment<Alimento> {
         etNomeA = view.findViewById(R.id.etNomeA);
         etProteinasA = view.findViewById(R.id.etProteinasA);
 
-        btnPesquisarA = view.findViewById(R.id.btnPesquisarA);
-        btnPesquisarA.setOnClickListener(e -> super.findOne());
-        btnAtualizarA = view.findViewById(R.id.btnAtualizarA);
+        Button btnPesquisarA = view.findViewById(R.id.btnPesquisarA);
+        btnPesquisarA.setOnClickListener(e -> {
+                super.findOne();
+        });
+        Button btnAtualizarA = view.findViewById(R.id.btnAtualizarA);
         btnAtualizarA.setOnClickListener(e -> super.update());
-        btnSalvarA = view.findViewById(R.id.btnSalvarA);
+        Button btnSalvarA = view.findViewById(R.id.btnSalvarA);
         btnSalvarA.setOnClickListener(e -> super.insert());
-        btnListarA = view.findViewById(R.id.btnListarA);
+        Button btnListarA = view.findViewById(R.id.btnListarA);
         btnListarA.setOnClickListener(e -> super.findAll());
-        btnDeletarA = view.findViewById(R.id.btnDeletarA);
+        Button btnDeletarA = view.findViewById(R.id.btnDeletarA);
         btnDeletarA.setOnClickListener(e -> super.delete());
 
         tvResultA = view.findViewById(R.id.tvResultA);
-
-        controller = new AlimentoController(null);
+        controller = new AlimentoController(new ConsumivelDao(view.getContext()));
     }
 
     @Override
