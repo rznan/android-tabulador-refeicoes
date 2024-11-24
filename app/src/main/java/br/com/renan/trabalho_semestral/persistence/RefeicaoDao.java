@@ -49,17 +49,17 @@ public class RefeicaoDao implements IOpenClosableDAO<Refeicao, RefeicaoDao> {
     public void insert(Refeicao refeicao) throws SQLException {
         ContentValues cvR = getContentValuesRefeicao(refeicao);
         long resultRefeicao = database.insert("Refeicao", null, cvR);
-        if(resultRefeicao == -1) {
+        if (resultRefeicao == -1) {
             throw new SQLException("Não foi possível Salvar a refeição");
         }
         boolean erroInsercaoItem = false;
-        for(Consumo c : refeicao.getItens()) {
+        for (Consumo c : refeicao.getItens()) {
             ContentValues cvC = getContentValuesConsumo(c);
             cvC.put("id_refeicao", refeicao.getId());
             long resultConsumo = database.insert("Consumo", null, cvC);
             erroInsercaoItem = erroInsercaoItem || resultConsumo == -1;
         }
-        if(erroInsercaoItem) {
+        if (erroInsercaoItem) {
             throw new SQLException("Não foi possível Salvar Todos os Itens");
         }
     }
@@ -78,13 +78,13 @@ public class RefeicaoDao implements IOpenClosableDAO<Refeicao, RefeicaoDao> {
                 null
         );
         boolean erroInsercaoItem = false;
-        for(Consumo c : refeicao.getItens()) {
+        for (Consumo c : refeicao.getItens()) {
             ContentValues cvC = getContentValuesConsumo(c);
             cvC.put("id_refeicao", refeicao.getId());
             long resultConsumo = database.insert("Consumo", null, cvC);
             erroInsercaoItem = erroInsercaoItem || resultConsumo == -1;
         }
-        if(erroInsercaoItem) {
+        if (erroInsercaoItem) {
             throw new SQLException("Não foi possível Atualizar Todos os Itens");
         }
         return updateResult;
@@ -93,7 +93,7 @@ public class RefeicaoDao implements IOpenClosableDAO<Refeicao, RefeicaoDao> {
     @Override
     public void delete(Refeicao refeicao) throws SQLException {
         database.delete(
-               "Consumo",
+                "Consumo",
                 "id_refeicao = " + refeicao.getId(),
                 null
         );
@@ -116,7 +116,7 @@ public class RefeicaoDao implements IOpenClosableDAO<Refeicao, RefeicaoDao> {
 
         Cursor cursor = getCursor(sql);
         refeicao = null;
-        if(consumivelDao.open() == null){
+        if (consumivelDao.open() == null) {
             consumivelDao.open();
         }
         if (cursor != null && !cursor.isAfterLast()) {
@@ -140,7 +140,7 @@ public class RefeicaoDao implements IOpenClosableDAO<Refeicao, RefeicaoDao> {
                         "FROM Refeicao";
 
         Cursor cursor = getCursor(sql);
-        if(consumivelDao.open() == null){
+        if (consumivelDao.open() == null) {
             consumivelDao.open();
         }
         if (cursor != null) {

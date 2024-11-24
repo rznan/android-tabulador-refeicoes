@@ -3,7 +3,7 @@ package br.com.renan.trabalho_semestral.model;
 import androidx.annotation.NonNull;
 
 /**
- *@author: renan santos carvalho
+ * @author: renan santos carvalho
  */
 public abstract class Consumivel {
     // pode implementar um contador para criar ids únicos para bebida e alimento

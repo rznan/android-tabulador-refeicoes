@@ -13,7 +13,7 @@ import br.com.renan.trabalho_semestral.persistence.RefeicaoDao;
 import br.com.renan.trabalho_semestral.support.SafeParser;
 
 /**
- *@author: renan santos carvalho
+ * @author: renan santos carvalho
  */
 public class ResumoRefeicaoFragment extends BaseCRUDFragment<Refeicao> {
 

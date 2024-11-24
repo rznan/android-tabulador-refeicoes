@@ -6,14 +6,12 @@ import android.widget.TextView;
 
 import br.com.renan.trabalho_semestral.controller.BebidaController;
 import br.com.renan.trabalho_semestral.controller.IController;
-import br.com.renan.trabalho_semestral.model.Alimento;
 import br.com.renan.trabalho_semestral.model.Bebida;
 import br.com.renan.trabalho_semestral.persistence.ConsumivelDao;
-import br.com.renan.trabalho_semestral.persistence.ICRUDDao;
 import br.com.renan.trabalho_semestral.support.SafeParser;
 
 /**
- *@author: renan santos carvalho
+ * @author: renan santos carvalho
  */
 public class BebidaFragment extends BaseCRUDFragment<Bebida> {
 

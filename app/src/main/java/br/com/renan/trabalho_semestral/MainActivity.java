@@ -16,7 +16,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 /**
- *@author: renan santos carvalho
+ * @author: renan santos carvalho
  */
 public class MainActivity extends AppCompatActivity {
 
@@ -34,10 +34,9 @@ public class MainActivity extends AppCompatActivity {
         });
 
         Bundle b = getIntent().getExtras();
-        if(b != null) {
+        if (b != null) {
             loadFragment(b);
-        }
-        else {
+        } else {
             fragment = new StartFragment();
             loadFragment();
         }
@@ -46,19 +45,15 @@ public class MainActivity extends AppCompatActivity {
 
     private void loadFragment(Bundle b) {
         String tipo = b.getString("Tipo");
-        if(tipo.equalsIgnoreCase("Alimento")) {
+        if (tipo.equalsIgnoreCase("Alimento")) {
             fragment = new AlimentoFragment();
-        }
-        else if(tipo.equalsIgnoreCase("Bebida")) {
+        } else if (tipo.equalsIgnoreCase("Bebida")) {
             fragment = new BebidaFragment();
-        }
-        else if(tipo.equalsIgnoreCase("Refeição")) {
+        } else if (tipo.equalsIgnoreCase("Refeição")) {
             fragment = new ResumoRefeicaoFragment();
-        }
-        else if(tipo.equalsIgnoreCase("AddRefeição")) {
+        } else if (tipo.equalsIgnoreCase("AddRefeição")) {
             fragment = new RefeicaoFragment();
-        }
-        else if(tipo.equalsIgnoreCase("Null")) {
+        } else if (tipo.equalsIgnoreCase("Null")) {
             fragment = new StartFragment();
         }
         loadFragment();
@@ -83,19 +78,15 @@ public class MainActivity extends AppCompatActivity {
         Bundle b = new Bundle();
         Intent i = new Intent(this, MainActivity.class);
 
-        if(id == R.id.itemAlimentos) {
+        if (id == R.id.itemAlimentos) {
             b.putString("Tipo", "Alimento");
-        }
-        else if(id == R.id.itemBebidas) {
+        } else if (id == R.id.itemBebidas) {
             b.putString("Tipo", "Bebida");
-        }
-        else if(id == R.id.itemResumo) {
+        } else if (id == R.id.itemResumo) {
             b.putString("Tipo", "Refeição");
-        }
-        else if(id == R.id.itemRefeicao) {
+        } else if (id == R.id.itemRefeicao) {
             b.putString("Tipo", "AddRefeição");
-        }
-        else {
+        } else {
             b.putString("Tipo", "Null");
         }
 

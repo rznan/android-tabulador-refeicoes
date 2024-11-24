@@ -4,8 +4,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.sql.SQLException;
-
 import br.com.renan.trabalho_semestral.controller.AlimentoController;
 import br.com.renan.trabalho_semestral.controller.IController;
 import br.com.renan.trabalho_semestral.model.Alimento;
@@ -13,7 +11,7 @@ import br.com.renan.trabalho_semestral.persistence.ConsumivelDao;
 import br.com.renan.trabalho_semestral.support.SafeParser;
 
 /**
- *@author: renan santos carvalho
+ * @author: renan santos carvalho
  */
 public class AlimentoFragment extends BaseCRUDFragment<Alimento> {
 
@@ -42,7 +40,7 @@ public class AlimentoFragment extends BaseCRUDFragment<Alimento> {
 
         Button btnPesquisarA = view.findViewById(R.id.btnPesquisarA);
         btnPesquisarA.setOnClickListener(e -> {
-                super.findOne();
+            super.findOne();
         });
         Button btnAtualizarA = view.findViewById(R.id.btnAtualizarA);
         btnAtualizarA.setOnClickListener(e -> super.update());
@@ -98,8 +96,8 @@ public class AlimentoFragment extends BaseCRUDFragment<Alimento> {
         this.etIdA.setText(String.valueOf(alimento.getId()));
         this.etNomeA.setText(alimento.getNome());
         this.etCaloriasA.setText(String.valueOf(alimento.getCalorias()));
-        this.etProteinasA.setText( String.valueOf(alimento.getProteinas()) );
-        this.etCarboidratosA.setText( String.valueOf(alimento.getCarboidratos()));
+        this.etProteinasA.setText(String.valueOf(alimento.getProteinas()));
+        this.etCarboidratosA.setText(String.valueOf(alimento.getCarboidratos()));
         this.etGorduraA.setText(String.valueOf(alimento.getGorduras()));
     }
 }

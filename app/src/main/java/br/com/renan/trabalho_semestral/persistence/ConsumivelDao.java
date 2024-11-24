@@ -49,9 +49,9 @@ public class ConsumivelDao implements IOpenClosableDAO<Consumivel, ConsumivelDao
     @Override
     public void insert(Consumivel consumivel) throws SQLException {
         ContentValues cvC = getContentValuesConsumivel(consumivel);
-        long consumivel1 = database.insert("consumivel", null, cvC);
+        database.insert("consumivel", null, cvC);
 
-        if(consumivel.getTipo() == TipoConsumivel.BEBIDA) {
+        if (consumivel.getTipo() == TipoConsumivel.BEBIDA) {
             ContentValues cvB = getContentValuesBebida((Bebida) consumivel);
             database.insert("bebida", null, cvB);
         } else {
@@ -64,22 +64,22 @@ public class ConsumivelDao implements IOpenClosableDAO<Consumivel, ConsumivelDao
     public int update(Consumivel consumivel) throws SQLException {
         ContentValues cvC = getContentValuesConsumivel(consumivel);
         database.update(
-            "Consumivel",  cvC,
-            "id_consumivel = " + consumivel.getId(),
-            null
+                "Consumivel", cvC,
+                "id_consumivel = " + consumivel.getId(),
+                null
         );
 
-        if(consumivel.getTipo() == TipoConsumivel.BEBIDA) {
+        if (consumivel.getTipo() == TipoConsumivel.BEBIDA) {
             ContentValues cvB = getContentValuesBebida((Bebida) consumivel);
             return database.update(
-                    "Bebida",  cvB,
+                    "Bebida", cvB,
                     "id_consumivel = " + consumivel.getId(),
                     null
             );
         } else {
             ContentValues cvA = getContentValuesAlimento((Alimento) consumivel);
             return database.update(
-                    "Alimento",  cvA,
+                    "Alimento", cvA,
                     "id_consumivel = " + consumivel.getId(),
                     null
             );
@@ -88,7 +88,7 @@ public class ConsumivelDao implements IOpenClosableDAO<Consumivel, ConsumivelDao
 
     @Override
     public void delete(Consumivel consumivel) throws SQLException {
-        if(consumivel.getTipo() == TipoConsumivel.BEBIDA) {
+        if (consumivel.getTipo() == TipoConsumivel.BEBIDA) {
             database.delete(
                     "Bebida",
                     "id_consumivel = " + consumivel.getId(),
@@ -116,8 +116,8 @@ public class ConsumivelDao implements IOpenClosableDAO<Consumivel, ConsumivelDao
     @Override
     public Consumivel findOne(Consumivel consumivel) throws SQLException {
         @Language("RoomSql") String sql;
-        if(consumivel.getTipo() == TipoConsumivel.BEBIDA) {
-             sql =
+        if (consumivel.getTipo() == TipoConsumivel.BEBIDA) {
+            sql =
                     "SELECT " +
                             "C.id_consumivel, " +
                             "C.calorias, " +
@@ -169,7 +169,7 @@ public class ConsumivelDao implements IOpenClosableDAO<Consumivel, ConsumivelDao
                         "WHERE C.id_consumivel = B.id_consumivel AND C.id_consumivel = A.id_consumivel";
 
         Cursor cursor = getCursor(sql);
-        while(cursor != null && !cursor.isAfterLast()) {
+        while (cursor != null && !cursor.isAfterLast()) {
             Consumivel consumivel = getConsumivel(cursor);
             list.add(consumivel);
             cursor.moveToNext();
@@ -181,7 +181,7 @@ public class ConsumivelDao implements IOpenClosableDAO<Consumivel, ConsumivelDao
     public List<Consumivel> findByType(int typeCode) throws SQLException {
         List<Consumivel> list = new ArrayList<>();
         @Language("RoomSql") String sql;
-        if(typeCode == TipoConsumivel.BEBIDA.getValue()) {
+        if (typeCode == TipoConsumivel.BEBIDA.getValue()) {
             sql =
                     "SELECT " +
                             "C.id_consumivel," +
@@ -288,8 +288,7 @@ public class ConsumivelDao implements IOpenClosableDAO<Consumivel, ConsumivelDao
         int tipo = cursor.getInt(cursor.getColumnIndex("tipo"));
         if (tipo == TipoConsumivel.BEBIDA.getValue()) {
             return getBebida(cursor);
-        }
-        else {
+        } else {
             return getAlimento(cursor);
         }
     }

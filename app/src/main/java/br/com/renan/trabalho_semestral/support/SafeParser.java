@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- *@author: renan santos carvalho
+ * @author: renan santos carvalho
  */
 public abstract class SafeParser {
 
@@ -43,12 +43,12 @@ public abstract class SafeParser {
 
     public static LocalDate safeParseLocalDate(String value, LocalDate defaultValue) {
         LocalDate res = safeParseLocalDate(value, "yyyy/MM/dd");
-        if(res != null) {
+        if (res != null) {
             return res;
         }
 
         res = safeParseLocalDate(value, "dd/MM/yyyy");
-        if(res != null) {
+        if (res != null) {
             return res;
         }
 

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *@author: renan santos carvalho
+ * @author: renan santos carvalho
  */
 public class Refeicao {
     int id;
@@ -60,16 +60,16 @@ public class Refeicao {
 
     public String detalharItens() {
         StringBuilder sb = new StringBuilder();
-        if(id != 0 && id >= 1) {
+        if (id != 0 && id >= 1) {
             sb.append(id).append(", ");
         }
         sb.append(data.format(DateTimeFormatter.ofPattern("yyyy/MM/dd")));
         sb.append("\n");
 
         int count = 0;
-        for(Consumo c : itens) {
+        for (Consumo c : itens) {
             sb.append("\t").append(count).append("| ").append(c.resumoTotal());
-            if(count < itens.size() - 1) {
+            if (count < itens.size() - 1) {
                 sb.append("\n");
             }
             count++;
@@ -86,9 +86,9 @@ public class Refeicao {
         sb.append("\n");
 
         int count = 0;
-        for(Consumo c : itens) {
+        for (Consumo c : itens) {
             sb.append("\t").append(count).append("| ").append(c.toString());
-            if(count < itens.size() - 1) {
+            if (count < itens.size() - 1) {
                 sb.append("\n");
             }
             count++;

@@ -58,7 +58,7 @@ public class GenericDao extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int o, int n) {
-        if(n > o) {
+        if (n > o) {
             sqLiteDatabase.execSQL("DROP TABLE IF EXISTS Consumo");
             sqLiteDatabase.execSQL("DROP TABLE IF EXISTS Refeicao");
             sqLiteDatabase.execSQL("DROP TABLE IF EXISTS Alimento");

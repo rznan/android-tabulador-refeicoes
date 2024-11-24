@@ -3,7 +3,7 @@ package br.com.renan.trabalho_semestral.model;
 import androidx.annotation.NonNull;
 
 /**
- *@author: renan santos carvalho
+ * @author: renan santos carvalho
  */
 public class Alimento extends Consumivel {
     int proteinas;
@@ -27,7 +27,7 @@ public class Alimento extends Consumivel {
 
     @Override
     public String calcularNutricaoCompleta(int quant) {
-        return    id + ", "
+        return id + ", "
                 + nome + ": "
                 + calorias * quant + "kcal, "
                 + proteinas * quant + "g (prot), "

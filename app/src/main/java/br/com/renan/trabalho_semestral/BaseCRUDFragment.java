@@ -84,7 +84,7 @@ public abstract class BaseCRUDFragment<T> extends Fragment {
     public void findOne() {
         try {
             T one = getController().search(viewToObject());
-            if(one != null) {
+            if (one != null) {
                 objectToView(one);
             } else {
                 Toast.makeText(view.getContext(), "Item não encontrado", Toast.LENGTH_LONG).show();

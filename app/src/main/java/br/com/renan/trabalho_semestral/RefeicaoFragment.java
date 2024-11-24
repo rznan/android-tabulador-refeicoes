@@ -27,7 +27,7 @@ import br.com.renan.trabalho_semestral.persistence.RefeicaoDao;
 import br.com.renan.trabalho_semestral.support.SafeParser;
 
 /**
- *@author: renan santos carvalho
+ * @author: renan santos carvalho
  */
 public class RefeicaoFragment extends BaseCRUDFragment<Refeicao> {
 
@@ -66,7 +66,7 @@ public class RefeicaoFragment extends BaseCRUDFragment<Refeicao> {
         btnUpdateR.setOnClickListener(e -> super.update());
         Button btnSalvarR = view.findViewById(R.id.btnSalvarR);
         btnSalvarR.setOnClickListener(e -> {
-            if(SafeParser.safeParseInt(etIdR.getText().toString(), 0) <= 0) {
+            if (SafeParser.safeParseInt(etIdR.getText().toString(), 0) <= 0) {
                 Toast.makeText(view.getContext(), "0 não é um id válido", Toast.LENGTH_LONG).show();
             } else {
                 super.insert();
@@ -96,7 +96,7 @@ public class RefeicaoFragment extends BaseCRUDFragment<Refeicao> {
     private void populateSpinner() {
 
         try {
-            if(rbBebidaR.isChecked()) {
+            if (rbBebidaR.isChecked()) {
                 List<Bebida> list = bebidaIController.list();
                 Bebida b0 = new Bebida(0, 0, "Selecione um item", 0, 0);
                 list.add(0, b0);
@@ -108,7 +108,7 @@ public class RefeicaoFragment extends BaseCRUDFragment<Refeicao> {
                 spinner.setAdapter(arrayAdapter);
             } else {
                 List<Alimento> list = alimentoIController.list();
-                Alimento b0 = new Alimento(0, 0, "Selecione um item", 0, 0 ,0);
+                Alimento b0 = new Alimento(0, 0, "Selecione um item", 0, 0, 0);
                 list.add(0, b0);
                 ArrayAdapter<Alimento> arrayAdapter = new ArrayAdapter<>(view.getContext(),
                         android.R.layout.simple_spinner_item,
@@ -126,11 +126,11 @@ public class RefeicaoFragment extends BaseCRUDFragment<Refeicao> {
     private void addItem() {
         int quant = SafeParser.safeParseInt(this.etQuantItemR.getText().toString(), 1);
 
-        if(spinner.getSelectedItemPosition() == 0) {
+        if (spinner.getSelectedItemPosition() == 0) {
             Toast.makeText(view.getContext(), "Selecione um item", Toast.LENGTH_LONG).show();
         } else {
-                targetRefeicao.addItem((Consumivel) spinner.getSelectedItem(), quant);
-                getResultTextview().setText(targetRefeicao.detalharItens());
+            targetRefeicao.addItem((Consumivel) spinner.getSelectedItem(), quant);
+            getResultTextview().setText(targetRefeicao.detalharItens());
         }
 
     }

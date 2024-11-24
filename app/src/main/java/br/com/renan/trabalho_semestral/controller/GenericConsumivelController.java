@@ -54,7 +54,7 @@ public abstract class GenericConsumivelController<T extends Consumivel> implemen
         }
         Consumivel one = DAO.findOne(t);
         DAO.close();
-        if(one != null && one.getTipo() == getConsumivelTipo()) {
+        if (one != null && one.getTipo() == getConsumivelTipo()) {
             //noinspection unchecked
             return (T) one;
         }
@@ -69,7 +69,7 @@ public abstract class GenericConsumivelController<T extends Consumivel> implemen
         List<Consumivel> all = DAO.findByType(getConsumivelTipo().getValue());
         DAO.close();
         List<T> result = new ArrayList<>();
-        for(Consumivel c : all) {
+        for (Consumivel c : all) {
             //noinspection unchecked
             result.add((T) c);
         }
